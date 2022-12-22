@@ -3,6 +3,7 @@ package me.maximde.utils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 public class TimUtils {
 
@@ -29,10 +30,29 @@ public class TimUtils {
             case 10: monthString = "October";       break;
             case 11: monthString = "November";      break;
             case 12: monthString = "December";      break;
-            default: monthString = "Error"; break;
+            default: monthString = "Error";         break;
         }
         finalData = cal.get(Calendar.DAY_OF_MONTH) + "th of " + monthString + " " + cal.get(Calendar.YEAR) + " Time: " + dateFormatTime.format(cal.getTime());
         return finalData;
     }
+
+    /**
+     * Convert seconds to nanos
+     * @param seconds
+     * @return nanos
+     */
+    public static Long secondsToNanos(long seconds) {
+        return TimeUnit.SECONDS.toNanos(seconds);
+    }
+
+    /**
+     * Convert nanos to seconds
+     * @param nanos
+     * @return seconds
+     */
+    public static long nanosToSeconds(long nanos) {
+        return TimeUnit.NANOSECONDS.toSeconds(nanos);
+    }
+
 
 }

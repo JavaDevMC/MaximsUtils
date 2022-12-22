@@ -1,0 +1,40 @@
+package com.mysql.cj.result;
+
+import com.mysql.cj.conf.PropertySet;
+import com.mysql.cj.protocol.InternalDate;
+import com.mysql.cj.protocol.InternalTime;
+import com.mysql.cj.protocol.InternalTimestamp;
+import java.time.Duration;
+
+public class DurationValueFactory extends AbstractDateTimeValueFactory<Duration> {
+  public DurationValueFactory(PropertySet pset) {
+    super(pset);
+  }
+  
+  Duration localCreateFromDate(InternalDate idate) {
+    return unsupported("DATE");
+  }
+  
+  public Duration localCreateFromTime(InternalTime it) {
+    String ptn = ((it.getHours() < 0) ? "-PT" : "PT") + ((it.getHours() < 0) ? -it.getHours() : it.getHours()) + "H" + it.getMinutes() + "M" + it.getSeconds() + "." + it.getNanos() + "S";
+    return Duration.parse(ptn);
+  }
+  
+  public Duration localCreateFromTimestamp(InternalTimestamp its) {
+    return unsupported("TIMESTAMP");
+  }
+  
+  public Duration localCreateFromDatetime(InternalTimestamp its) {
+    return unsupported("DATETIME");
+  }
+  
+  public String getTargetTypeName() {
+    return Duration.class.getName();
+  }
+}
+
+
+/* Location:              C:\Users\Win10\Desktop\VoxilityCraftServer\Bungee\BungeeCord.jar!\com\mysql\cj\result\DurationValueFactory.class
+ * Java compiler version: 8 (52.0)
+ * JD-Core Version:       1.1.3
+ */
